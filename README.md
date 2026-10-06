@@ -107,32 +107,6 @@ In an emergency medical platform handling real-time city dispatches and patient 
 ```cmd
 cd src\api-gateway
 mvn spring-boot:run
-```
 
----
 
-## 6. Viva & Teacher Q&A Preparation (Questions Pushkar Can Answer)
 
-**Q1: What was your specific role in this group project?**
-> *Answer*: "I was the Security and Authorization Engineer. I developed the Role-Based Access Control (RBAC) engine, the Tactical Authentication Gate, the API Gateway pre-routing security filters, and the HIPAA-compliant salted telephone anonymizer."
-
-**Q2: Why do you need salted hashing for telephone numbers? Why not simple encryption?**
-> *Answer*: "With two-way encryption, encryption keys can be leaked or subpoenaed, compromising caller privacy. Salted one-way hashing (SHA-256 + secret salt) irreversibly masks the phone number, preventing rainbow table attacks while still allowing deterministic matching if the same caller calls back multiple times."
-
-**Q3: How does your Role-Based Access Control (RBAC) work across services?**
-> *Answer*: "We defined 4 distinct roles (Admin, Dispatcher, Crew, Hospital Staff) in a strict policy matrix. When a user logs in, they receive a signed bearer token containing their role and timestamp. The API Gateway validates this token before routing any request to downstream microservices."
-
-**Q4: What happens if an unauthorized user tries to trigger a green-wave traffic corridor?**
-> *Answer*: "The gateway inspects the token's permissions. Only the `ADMIN` role possesses the `ACTIVATE_GREEN_WAVE` permission. Any unauthorized attempt is rejected with HTTP 403 Forbidden and logged to the Audit Service."
-
----
-
-## 7. How to Push This Module to Your Own GitHub
-```bash
-git init
-git add .
-git commit -m "Initial commit: Pushkar - Security, RBAC & HIPAA Anonymizer"
-git branch -M main
-git remote add origin https://github.com/<your-username>/ems-security-auth.git
-git push -u origin main
-```
